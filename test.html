@@ -1,0 +1,16 @@
+<script>
+    const socket = new WebSocket("ws://127.0.0.1:3050/");
+    socket.addEventListener('open', (event) => {
+        socket.send('{"type": "connect", "data": {}}');
+    });
+    socket.addEventListener('message', (event) => {
+        console.log(event.data);
+    });
+
+    setTimeout(function() {
+        var character = "1|2|3|4";
+        var name = "Char Name";
+        var msg = "Hello World!";
+        socket.send(`{"type": "message", "data": {"char": "${character}", "name": "${name}", "msg": "${msg}"}}`);
+    }, 3000)
+</script>
